@@ -1,6 +1,6 @@
 
 /**
- * myStack
+ * myStack LIFO
  */
 class myStack {
     int arr[];
@@ -13,7 +13,7 @@ class myStack {
         capacity = size;
     }
 
-    public void push(int element) {
+    void push(int element) {
         if (top + 1 < capacity) {
             arr[++top] = element;
 
@@ -30,7 +30,7 @@ class myStack {
         }
     }
 
-    public void pop() {
+    void pop() {
         if (top == -1) {
             System.out.println("Stack is empty");
         } else {
@@ -39,7 +39,7 @@ class myStack {
             System.out.println("Popping element " + ele);
 
             if (top == -1) {
-                System.out.println("Satck is empty now after popping");
+                System.out.println("Stack is empty now after popping");
             } else {
 
                 for (int i = 0; i <= top; i++) {
