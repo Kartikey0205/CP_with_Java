@@ -21,6 +21,7 @@ public class treeImplementation {
     static List<Integer> inOrder = new ArrayList<>();
     static List<Integer> preOrder = new ArrayList<>();
     static List<Integer> postOrder = new ArrayList<>();
+    static List<Integer> leftView = new ArrayList<>();
 
     // Insert value and checking whether its root is null or not || root k left
     // value se bda h y chota
@@ -79,6 +80,20 @@ public class treeImplementation {
         return postOrder;
     }
 
+    // Printing left view only of tree
+    public static List<Integer> leftViewTree(Node node) {
+        if (node != null) {
+            if (node.left != null) {
+                leftView.add(node.left.value);
+
+            }
+            leftViewTree(node.left);
+            leftViewTree(node.right);
+
+        }
+        return leftView;
+    }
+
     public static void main(String[] args) {
         treeImplementation binaryTree = new treeImplementation();
         binaryTree.root = new Node(45);
@@ -98,6 +113,8 @@ public class treeImplementation {
         System.out.println("PostOrder will be ");
         System.out.println(traversePostOrder(root));
 
+        System.out.println("Left View Tree of BST will be");
+        System.out.println(leftViewTree(root));
     }
 }
 
@@ -108,6 +125,6 @@ public class treeImplementation {
  * -----------------------------------45-------------------------------------
  * -----------------------20---------------------50---------------------------
  * -----------------10---------40----------------------------90--------------
- * ------------5--------------------------------------------------------67---
+ * ------------5---------------------------------------67-------------------
  * 
  */
