@@ -22,6 +22,8 @@ public class treeImplementation {
     static List<Integer> preOrder = new ArrayList<>();
     static List<Integer> postOrder = new ArrayList<>();
     static List<Integer> leftView = new ArrayList<>();
+    static List<Integer> leftChild = new ArrayList<>();
+    static List<Integer> mirrorView = new ArrayList<>();
 
     // Insert value and checking whether its root is null or not || root k left
     // value se bda h y chota
@@ -80,18 +82,50 @@ public class treeImplementation {
         return postOrder;
     }
 
-    // Printing left view only of tree
-    public static List<Integer> leftViewTree(Node node) {
+    // Printing left child of whole tree
+    public static List<Integer> leftChildTree(Node node) {
         if (node != null) {
+            // leftView.add(node.value); // for only left view
             if (node.left != null) {
-                leftView.add(node.left.value);
+                leftChild.add(node.left.value);
 
             }
+            leftChildTree(node.left);
+            leftChildTree(node.right);
+
+        }
+        return leftChild;
+    }
+
+    // Printing left View of whole tree
+    public static List<Integer> leftViewTree(Node node) {
+        if (node != null) {
+            leftView.add(node.value); // for only left view
             leftViewTree(node.left);
-            leftViewTree(node.right);
 
         }
         return leftView;
+    }
+
+    public static void swap(Node n) {
+        Node temp = n.left;
+        n.left = n.right;
+        n.right = temp;
+    }
+
+    // Printing mirror view only of tree
+    public static List<Integer> mirrorViewTree(Node node) {
+        if (node != null) {
+            swap(node);
+            // Node temp = node.left;
+            // node.left = node.right;
+            // node.right = temp;
+            mirrorViewTree(node.left);
+            mirrorView.add(node.value);
+            mirrorViewTree(node.right);
+
+        }
+        return mirrorView;
     }
 
     public static void main(String[] args) {
@@ -113,8 +147,14 @@ public class treeImplementation {
         System.out.println("PostOrder will be ");
         System.out.println(traversePostOrder(root));
 
-        System.out.println("Left View Tree of BST will be");
+        System.out.println("Left Child of  whole BST will be");
+        System.out.println(leftChildTree(root));
+
+        System.out.println("Left view of  whole BST will be");
         System.out.println(leftViewTree(root));
+
+        System.out.println("Mirror View of BST will be");
+        System.out.println(mirrorViewTree(root));
     }
 }
 
