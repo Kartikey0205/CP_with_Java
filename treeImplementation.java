@@ -24,6 +24,7 @@ public class treeImplementation {
     static List<Integer> leftView = new ArrayList<>();
     static List<Integer> leftChild = new ArrayList<>();
     static List<Integer> mirrorView = new ArrayList<>();
+    static List<Integer> topView = new ArrayList<>();
 
     // Insert value and checking whether its root is null or not || root k left
     // value se bda h y chota
@@ -128,6 +129,36 @@ public class treeImplementation {
         return mirrorView;
     }
 
+    // Left side
+    public static void leftSideValue(Node n) {
+        if (n != null) {
+            leftSideValue(n.left);
+            topView.add(n.value);
+        }
+    }
+
+    // Right side
+    public static void rightSideValue(Node n) {
+        if (n != null) {
+            topView.add(n.value);
+            rightSideValue(n.right);
+        }
+    }
+
+    // Top View of Tree
+
+    public static List<Integer> topViewTree(Node node) {
+        if (node != null) {
+
+            leftSideValue(node.left);
+
+            topView.add(node.value);
+            rightSideValue(node.right);
+        }
+
+        return topView;
+    }
+
     public static void main(String[] args) {
         treeImplementation binaryTree = new treeImplementation();
         binaryTree.root = new Node(45);
@@ -152,9 +183,11 @@ public class treeImplementation {
 
         System.out.println("Left view of  whole BST will be");
         System.out.println(leftViewTree(root));
-
+        System.out.println("Top View of BST will be");
+        System.out.println(topViewTree(root));
         System.out.println("Mirror View of BST will be");
         System.out.println(mirrorViewTree(root));
+
     }
 }
 
